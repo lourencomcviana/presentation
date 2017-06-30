@@ -71,22 +71,12 @@ DATA_LOG | SEQ |PRIORIDADE| DESCRICAO_UPDATE
 30/06/17 08:37:40,991218 | 64 | 2 |  OLA MUNDO
 
 
-
-
 #HSLIDE
 ### Contexto e relações de contextuais
 - Permite a categoriação dos logs
 - Funciona como "Namespace" do log
 - Pode indicar onde exatamente o log estava quando o mesmo iniciou
 - Muito útil para consultas e monitoramento
-
-#VSLIDE
-### Exemplo:
-Prioridade | Descricao
---| -----
-1 | CORP
-2 | HOMCORP
-3 | DEVCORP
 
 #VSLIDE
 ``` SQL
@@ -111,9 +101,70 @@ ID_RELACAO | PATH_CONTEXTO
 298272 | TESTE.SIMPLES
 
 
+#VSLIDE
+``` SQL
+SELECT ID_RELACAO,ID_RELACAO_PAI,ID_CONTEXTO,
+  ID_PRIORIDADE_DEFAULT,NIVEL, CONTEXTO,PATH
+FROM TABLE(
+  LOG_AUDITORIA.PKG_LOG.F_CONTEXTO_LEAF(298272)
+);
+```
 
+#VSLIDE
+ID_RELACAO | ID_RELACAO_PAI | ID_CONTEXTO
+---- | -- | ---
+298272 | 45 | 896047
+45 |  | 139
 
+#VSLIDE
+ID_PRIORIDADE_DEFAULT | NIVEL | CONTEXTO 
+-- | -------- | ----- 
+2 | 1 | SIMPLES  
+3 | 2 | TESTE  
+
+#VSLIDE
+``` SQL
+SELECT * 
+FROM LOG_AUDITORIA.TAB_CONTEXTO C 
+WHERE
+ EXISTS(
+  SELECT ID_CONTEXTO 
+  FROM TABLE(
+   LOG_AUDITORIA.PKG_LOG.F_CONTEXTO_LEAF(298272)
+  )
+  WHERE ID_CONTEXTO=C.ID
+ )
+```
+#VSLIDE
+ID |  CONTEXTO 
+-- | -------- 
+896047 | SIMPLES  
+139 | TESTE  
+
+#HSLIDE
+``` sql
+declare
+ p_saida varchar2(4000);
+ logx XMLTYPE;
+ logerror xmltype;
+begin
+ Log_auditoria.Pkg_Log.P_LOG('sasa',3,'TESTE',logx);
+ Log_auditoria.Pkg_Log.P_ADD('teste','asasa',logx);
+ Log_auditoria.Pkg_Log.P_ADD('testenum',2,logx);
+ Log_auditoria.Pkg_Log.P_ADD('testedata',sysdate,logx);
+ Log_auditoria.Pkg_Log.P_LOG('inserir xml',logx);
+ Log_auditoria.Pkg_Log.P_ADD('testexml',xmltype('<p>eu sou um <b>paragrafo</b> html</p>'),logx);
+ dbms_output.put_line(logx.getClobVal());
+ p_saida:=2/0;
+ 
+ exception
+   when others THEN
+     Log_auditoria.PKG_LOG.P_LOG_ERRO('Erro em producao','TESTE.ERRO.ANONYMOUS',logx,logerror);
+     dbms_output.put_line(logerror.getClobVal());
+     Log_auditoria.PKG_LOG.P_ADD('OBS','ERRO DEVIDO A COMPREENSAO FALHA DA MATEMATICA',logerror);
+end;
+```
 
 #HSLIDE
 ## Documentação
-[helper](http://x-oc-config.sefa.pa.gov.br/gitlab/sefa/sefa-ui/wikis/helper)
+[Log no banco de dados gitLab](http://x-oc-config.sefa.pa.gov.br/gitlab/sefa/tutoriais/wikis/usando-schema-de-log-no-banco)
