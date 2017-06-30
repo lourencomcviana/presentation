@@ -2,7 +2,8 @@
 # Schema de Log
 
 #HSLIDE
-## Conteudo
+## Apresentação
+- O que é?
 - Log Simples
 - Prioridade
 - Contexto e relações de contextuais
@@ -12,9 +13,26 @@
 - Estrutura e modelagem
 
 #HSLIDE
-## O que é?
-O Helper trabalha com arquivos no formato **[markdown](https://guides.github.com/features/mastering-markdown/)**. Um arquivo
-markdown deve existir e estar acessível por URL.
+### Log Simples
+
+``` SQL
+BEGIN
+  INTERFACE.PKG_LOG.P_LOG('OLA MUNDO');
+END;
+/
+SELECT DATA_LOG,SEQ, DESCRICAO_UPDATE FROM LOG_AUDITORIA.V_LOG_RECENTE;
+```
+#VSLIDE
+DATA_LOG | SEQ | DESCRICAO_UPDATE
+--| ------ | ------
+30/06/17 08:37:40,991218 | 64  |  OLA MUNDO
+
+
+Linha | DATA_LOG | SEQ | PRIORIDADE | COD_UPDATE | DATA_UPDATE | DESCRICAO_UPDATE | LOG | PATH_CONTEXTO | ID_RELACAO | ID_CONTEXTO
+--| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | --- 
+
+
+
 #HSLIDE
 Graças a característica acima. Um sistema pode adicionar índices de ajuda
 de outros sistema (um sistema que gera DAE pode importar a ajuda do dae do sistema responsável por gerar DAE. Ou até direto da wiki externa do gitlab)
