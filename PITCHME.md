@@ -7,10 +7,8 @@
 - Log Simples
 - Prioridade
 - Contexto e relações de contextuais
-- Referências de log
-- Consultas
-- Casos de uso
-- Estrutura e modelagem
+- Referências de log e parâmetros
+- Documentação
 
 #HSLIDE
 ### Log Simples
@@ -29,13 +27,6 @@ SELECT DATA_LOG,SEQ, DESCRICAO_UPDATE FROM LOG_AUDITORIA.V_LOG_RECENTE;
 DATA_LOG | SEQ | DESCRICAO_UPDATE
 --| ------ | ------
 30/06/17 08:37:40,991218 | 64  |  OLA MUNDO
-
-#VSLIDE
-
-Linha | DATA_LOG | SEQ | PRIORIDADE | COD_UPDATE | DATA_UPDATE | DESCRICAO_UPDATE | LOG | PATH_CONTEXTO | ID_RELACAO | ID_CONTEXTO
---| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | --- 
-
-
 
 #HSLIDE
 ### Prioridade
@@ -142,6 +133,10 @@ ID |  CONTEXTO
 139 | TESTE  
 
 #HSLIDE
+
+Exemplo completo
+
+#VSLIDE
 ``` sql
 declare
  p_saida varchar2(4000);
