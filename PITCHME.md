@@ -2,8 +2,18 @@
 # Modelos de vendas de sistemas
 
 #HSLIDE
-## Mapa mental
+
+## Principais
+1. Produto
+2. Serviço
+3. Marketing
+
+#VSLIDE
+[Venda de sistemas ](Venda_sistemas.pdf)
 ![Mapa mental](Venda_sistemas.png)
+
+#HSLIDE
+
 
 #HSLIDE
 ## Sisjuri
