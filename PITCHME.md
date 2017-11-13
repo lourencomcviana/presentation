@@ -9,7 +9,7 @@
 3. Marketing
 
 #VSLIDE
-[Venda de sistemas ](Venda_sistemas.pdf)
+[Venda de sistemas ](https://github.com/lourencomcviana/presentation/blob/venda/Venda_sistemas.pdf)
 ![Mapa mental](Venda_sistemas.png)
 
 #HSLIDE
