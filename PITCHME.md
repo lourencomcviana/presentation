@@ -66,6 +66,7 @@
   - Um produto de sucesso atrai forte concorrência, um deslize e você está fora do jogo
 
 #HSLIDE
+
 ## Sisjuri
 
 ![Mapa mental](modulos_sisjuri.png)
